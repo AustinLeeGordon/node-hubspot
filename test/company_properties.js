@@ -50,13 +50,11 @@ describe('companies.properties', function() {
     })
 
     it('should get a property by name', function() {
-      return hubspot.companies.properties
-        .getByName(propertyName)
-        .then(results => {
-          // console.log(results)
-          expect(results).to.be.an('object')
-          expect(results).to.have.a.property('name')
-        })
+      return hubspot.companies.properties.getByName(propertyName).then(results => {
+        // console.log(results)
+        expect(results).to.be.an('object')
+        expect(results).to.have.a.property('name')
+      })
     })
   })
 
@@ -73,13 +71,11 @@ describe('companies.properties', function() {
     property.label = 'MadKudo Company Fit'
 
     it('should update the property', function() {
-      return hubspot.companies.properties
-        .update(property.name, property)
-        .then(data => {
-          expect(data).to.be.an('object')
-          expect(data).to.have.a.property('name')
-          expect(data.label).to.equal(property.label)
-        })
+      return hubspot.companies.properties.update(property.name, property).then(data => {
+        expect(data).to.be.an('object')
+        expect(data).to.have.a.property('name')
+        expect(data.label).to.equal(property.label)
+      })
     })
   })
 })

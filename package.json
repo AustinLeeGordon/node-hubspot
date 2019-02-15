@@ -2,18 +2,25 @@
   "name": "hubspot",
   "version": "2.1.0",
   "description": "A node wrapper for the HubSpot API",
-  "main": "index.js",
+  "main": "./dist/client.js",
+  "types": "./dist/client.d.ts",
+  "files": [
+    "dist/**/*"
+  ],
   "scripts": {
-    "build": "npm install && npm test && npm run lint",
-    "test": "cross-env NODE_ENV=test npm run lint && npm run mocha && npm run tsc",
+    "build": "npm install && npm test && npm run lint && npm run tsc",
+    "clean": "npm run clean:build && npm run clean:coverage",
+    "clean:build": "rimraf ./dist",
+    "clean:coverage": "rimraf ./coverage ./.nyc_output",
     "coverage": "nyc --reporter=lcov mocha --timeout=10000",
-    "lint": "npm run prettier && npm run eslint",
-    "tsc": "tsc",
-    "ts-node": "ts-node test/typescript/hubspot.ts",
-    "mocha": "mocha --recursive test/ --timeout 15000",
-    "eslint": "eslint . --fix",
+    "tslint": "tslint ./lib/**/*.{ts,tsx} --fix",
+    "lint": "npm run prettier && npm run tslint",
+    "mocha": "nyc mocha --recursive test/ --timeout=15000",
+    "prepublishOnly": "npm run tsc",
     "prettier": "prettier --write {lib,test}/**/*.{js,ts}",
-    "watch-test": "mocha --recursive test/ --timeout 15000 --watch"
+    "test": "cross-env NODE_ENV=test npm run lint && npm run mocha && npm run tsc",
+    "tsc": "npm run clean && tsc",
+    "ts-node": "ts-node test/typescript/hubspot.ts"
   },
   "repository": {
     "type": "git",
@@ -27,6 +34,23 @@
     "url": "https://github.com/brainflake/"
   },
   "license": "MIT",
+  "nyc": {
+    "extension": [
+      ".js",
+      ".ts",
+      ".tsx"
+    ],
+    "exclude": [
+      "coverage/",
+      "dist/",
+      "test/",
+      "**/*.d.ts"
+    ],
+    "reporter": [
+      "lcov"
+    ],
+    "all": true
+  },
   "dependencies": {
     "bottleneck": "^2.3.0",
     "debug": "^4.1.0",
@@ -35,6 +59,9 @@
     "request-promise": "^4.2.2"
   },
   "devDependencies": {
+    "@types/chai": "^4.1.7",
+    "@types/lodash": "^4.14.118",
+    "@types/mocha": "^5.2.5",
     "@types/node": "^10.5.1",
     "@types/request": "^2.47.0",
     "@types/request-promise": "^4.1.41",
@@ -42,18 +69,16 @@
     "cross-env": "^5.2.0",
     "dotenv": "^6.2.0",
     "eslint": "^5.7.0",
-    "eslint-config-prettier": "^3.3.0",
-    "eslint-config-standard": "12.0.0",
-    "eslint-plugin-import": "^2.9.0",
-    "eslint-plugin-node": "^7.0.1",
-    "eslint-plugin-prettier": "^3.0.0",
-    "eslint-plugin-promise": "^4.0.1",
-    "eslint-plugin-standard": "4.0.0",
     "mocha": "^5.0.1",
     "nock": "^10.0.3",
-    "nyc": "^13.1.0",
+    "nyc": "^13.3.0",
     "prettier": "^1.15.3",
+    "rimraf": "^2.6.3",
     "ts-node": "^7.0.1",
+    "tslint": "5.11.0",
+    "tslint-config-airbnb": "5.11.1",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-config-standard": "^8.0.1",
     "typescript": "^3.1.3"
   }
 }

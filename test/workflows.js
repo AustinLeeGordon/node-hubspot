@@ -13,9 +13,7 @@ describe('workflows', function() {
     return hubspot.contacts.get().then(data => {
       const firstContact = data.contacts[0]
       contactId = firstContact.vid
-      contactEmail = firstContact['identity-profiles'][0].identities.find(
-        obj => obj.type === 'EMAIL'
-      ).value
+      contactEmail = firstContact['identity-profiles'][0].identities.find(obj => obj.type === 'EMAIL').value
     })
   })
 

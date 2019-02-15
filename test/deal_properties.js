@@ -93,13 +93,11 @@ describe('deals.properties', function() {
     property.label = 'MadKudo Company Fit'
 
     it('should update the property', function() {
-      return hubspot.deals.properties
-        .update(property.name, property)
-        .then(data => {
-          expect(data).to.be.an('object')
-          expect(data).to.have.a.property('name')
-          expect(data.label).to.equal(property.label)
-        })
+      return hubspot.deals.properties.update(property.name, property).then(data => {
+        expect(data).to.be.an('object')
+        expect(data).to.have.a.property('name')
+        expect(data.label).to.equal(property.label)
+      })
     })
   })
 })

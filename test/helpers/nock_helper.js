@@ -1,14 +1,6 @@
 const nock = require('nock')
 
-const mockEndpoint = ({
-  path,
-  response,
-  responseError,
-  verb,
-  request,
-  query = {},
-  statusCode = 200,
-}) => {
+const mockEndpoint = ({ path, response, responseError, verb, request, query = {}, statusCode = 200 }) => {
   if (responseError) {
     nock('http://api.hubapi.com', { encodedQueryParams: true })
       .intercept(path, verb, request)

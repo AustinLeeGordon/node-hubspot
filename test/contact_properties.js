@@ -15,15 +15,11 @@ describe('contacts.properties', function() {
     fieldType: 'text',
     options: [],
   }
-  const deleteTestContactPropertyGroup = name =>
-    hubspot.contacts.properties.deleteGroup(name)
-  const createTestContactPropertyGroup = properties =>
-    hubspot.contacts.properties.createGroup(properties)
+  const deleteTestContactPropertyGroup = name => hubspot.contacts.properties.deleteGroup(name)
+  const createTestContactPropertyGroup = properties => hubspot.contacts.properties.createGroup(properties)
 
-  const deleteTestContactProperty = name =>
-    hubspot.contacts.properties.delete(name)
-  const createTestContactProperty = properties =>
-    hubspot.contacts.properties.create(properties)
+  const deleteTestContactProperty = name => hubspot.contacts.properties.delete(name)
+  const createTestContactProperty = properties => hubspot.contacts.properties.create(properties)
 
   describe('get', function() {
     const getAllEndpoint = {
@@ -57,9 +53,7 @@ describe('contacts.properties', function() {
 
   describe('getByName', function() {
     const getByNameEndpoint = {
-      path: `/properties/v1/contacts/properties/named/${
-        contactPropertyProperties.name
-      }`,
+      path: `/properties/v1/contacts/properties/named/${contactPropertyProperties.name}`,
       response: contactPropertyProperties,
     }
     fakeHubspotApi.setupServer({ getEndpoints: [getByNameEndpoint] })
@@ -76,20 +70,16 @@ describe('contacts.properties', function() {
     })
 
     it('should get a property by name', function() {
-      return hubspot.contacts.properties
-        .getByName(contactPropertyProperties.name)
-        .then(results => {
-          expect(results).to.be.an('object')
-          expect(results).to.have.a.property('name')
-        })
+      return hubspot.contacts.properties.getByName(contactPropertyProperties.name).then(results => {
+        expect(results).to.be.an('object')
+        expect(results).to.have.a.property('name')
+      })
     })
   })
 
   describe('delete', function() {
     const deleteEndpoint = {
-      path: `/properties/v1/contacts/properties/named/${
-        contactPropertyProperties.name
-      }`,
+      path: `/properties/v1/contacts/properties/named/${contactPropertyProperties.name}`,
       statusCode: 204,
     }
     fakeHubspotApi.setupServer({ deleteEndpoints: [deleteEndpoint] })
@@ -101,11 +91,9 @@ describe('contacts.properties', function() {
     })
 
     it('can delete', function() {
-      return hubspot.contacts.properties
-        .delete(contactPropertyProperties.name)
-        .then(data => {
-          expect(data).to.be.an('undefined')
-        })
+      return hubspot.contacts.properties.delete(contactPropertyProperties.name).then(data => {
+        expect(data).to.be.an('undefined')
+      })
     })
   })
 
@@ -123,20 +111,16 @@ describe('contacts.properties', function() {
     })
 
     it('should create the property', function() {
-      return hubspot.contacts.properties
-        .create(contactPropertyProperties)
-        .then(data => {
-          expect(data.description).to.eq(contactPropertyProperties.description)
-        })
+      return hubspot.contacts.properties.create(contactPropertyProperties).then(data => {
+        expect(data.description).to.eq(contactPropertyProperties.description)
+      })
     })
   })
 
   describe('update', function() {
     const description = 'Updated display name'
     const updateEndpoint = {
-      path: `/properties/v1/contacts/properties/named/${
-        contactPropertyProperties.name
-      }`,
+      path: `/properties/v1/contacts/properties/named/${contactPropertyProperties.name}`,
       response: { ...contactPropertyProperties, description },
     }
     fakeHubspotApi.setupServer({ putEndpoints: [updateEndpoint] })
@@ -179,13 +163,9 @@ describe('contacts.properties', function() {
       })
 
       it('should create the property', function() {
-        return hubspot.contacts.properties
-          .upsert(contactPropertyProperties)
-          .then(data => {
-            expect(data.description).to.eq(
-              contactPropertyProperties.description
-            )
-          })
+        return hubspot.contacts.properties.upsert(contactPropertyProperties).then(data => {
+          expect(data.description).to.eq(contactPropertyProperties.description)
+        })
       })
     })
 
@@ -196,9 +176,7 @@ describe('contacts.properties', function() {
         statusCode: 409,
       }
       const updateEndpoint = {
-        path: `/properties/v1/contacts/properties/named/${
-          contactPropertyProperties.name
-        }`,
+        path: `/properties/v1/contacts/properties/named/${contactPropertyProperties.name}`,
         response: { ...contactPropertyProperties, description },
       }
       fakeHubspotApi.setupServer({
@@ -218,11 +196,9 @@ describe('contacts.properties', function() {
       })
 
       it('should update the property', function() {
-        return hubspot.contacts.properties
-          .upsert({ ...contactPropertyProperties, description })
-          .then(data => {
-            expect(data.description).to.eq(description)
-          })
+        return hubspot.contacts.properties.upsert({ ...contactPropertyProperties, description }).then(data => {
+          expect(data.description).to.eq(description)
+        })
       })
     })
   })
@@ -257,9 +233,7 @@ describe('contacts.properties', function() {
       })
 
       it('returns a 200', function() {
-        return hubspot.contacts.properties
-          .createGroup({ name })
-          .then(data => expect(data).to.be.a('object'))
+        return hubspot.contacts.properties.createGroup({ name }).then(data => expect(data).to.be.a('object'))
       })
     })
 
@@ -312,9 +286,7 @@ describe('contacts.properties', function() {
       })
 
       it('returns a 204', function() {
-        return hubspot.contacts.properties
-          .deleteGroup(name)
-          .then(data => expect(data).to.be.an('undefined'))
+        return hubspot.contacts.properties.deleteGroup(name).then(data => expect(data).to.be.an('undefined'))
       })
     })
   })

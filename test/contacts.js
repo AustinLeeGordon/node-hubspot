@@ -5,10 +5,7 @@ const { createTestContact, deleteTestContact } = require('./helpers/factories')
 const Hubspot = require('..')
 const emailsFromContacts = contacts =>
   contacts.flatMap(contact =>
-    contact['identity-profiles'].map(
-      profile =>
-        profile.identities.find(identity => identity.type === 'EMAIL').value
-    )
+    contact['identity-profiles'].map(profile => profile.identities.find(identity => identity.type === 'EMAIL').value)
   )
 
 describe('contacts', function() {
@@ -155,10 +152,7 @@ describe('contacts', function() {
   })
 
   describe('getByEmailBatch', function() {
-    let emails = [
-      'testingapis@hubspot.com',
-      'testingapisawesomeandstuff@hubspot.com',
-    ]
+    let emails = ['testingapis@hubspot.com', 'testingapisawesomeandstuff@hubspot.com']
     const contactByEmailsEndpoint = {
       path: '/contacts/v1/contact/emails/batch',
       response: { properties: {} },
@@ -285,11 +279,9 @@ describe('contacts', function() {
     })
 
     it('should Create or Update a contact', function() {
-      return hubspot.contacts
-        .createOrUpdate(email, createOrUpdateData)
-        .then(data => {
-          expect(data).to.be.an('object')
-        })
+      return hubspot.contacts.createOrUpdate(email, createOrUpdateData).then(data => {
+        expect(data).to.be.an('object')
+      })
     })
   })
 
@@ -411,11 +403,9 @@ describe('contacts', function() {
     })
 
     it('should update a batch of company', function() {
-      return hubspot.contacts
-        .createOrUpdateBatch(createOrUpdateData)
-        .then(data => {
-          expect(data).to.equal(undefined)
-        })
+      return hubspot.contacts.createOrUpdateBatch(createOrUpdateData).then(data => {
+        expect(data).to.equal(undefined)
+      })
     })
   })
 

@@ -15,9 +15,7 @@ describe('broadcasts', function() {
         accessToken: process.env.ACCESS_TOKEN || 'fake-token',
       })
 
-      return hubspot.broadcasts
-        .get()
-        .then(data => expect(data).to.be.a('array'))
+      return hubspot.broadcasts.get().then(data => expect(data).to.be.a('array'))
     })
   })
 })

@@ -24,12 +24,10 @@ describe('companies', function() {
     })
 
     it('should return the requested properties', function() {
-      return hubspot.companies
-        .get({ limit: 5, properties: ['name', 'country', 'city'] })
-        .then(data => {
-          expect(data.companies).to.be.a('array')
-          expect(data.companies[0].properties.name.value).to.be.a('string')
-        })
+      return hubspot.companies.get({ limit: 5, properties: ['name', 'country', 'city'] }).then(data => {
+        expect(data.companies).to.be.a('array')
+        expect(data.companies[0].properties.name.value).to.be.a('string')
+      })
     })
   })
 

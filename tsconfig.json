@@ -1,20 +1,16 @@
 {
   "compilerOptions": {
+    "declaration": true,
+    "outDir": "./dist/",
+    "sourceMap": true,
     "module": "commonjs",
     "lib": [
       "es6"
     ],
-    "baseUrl": "./",
-    "noEmit": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "typeRoots": [
-      "./"
-    ],
-    "types": []
+    "target": "es5"
   },
-  "files": [
-    "index.d.ts",
-    "test/typescript/hubspot.ts"
+  "include": [
+    "./index.ts",
+    "./lib/**/*"
   ]
 }

@@ -45,13 +45,11 @@ describe('deals.properties.groups', function() {
     group.displayName = 'MadKudo Company Fit'
 
     it('should update the property', function() {
-      return hubspot.deals.properties.groups
-        .update(group.name, group)
-        .then(data => {
-          expect(data).to.be.an('object')
-          expect(data).to.have.a.property('name')
-          expect(data.displayName).to.equal(group.displayName)
-        })
+      return hubspot.deals.properties.groups.update(group.name, group).then(data => {
+        expect(data).to.be.an('object')
+        expect(data).to.have.a.property('name')
+        expect(data.displayName).to.equal(group.displayName)
+      })
     })
   })
 })
